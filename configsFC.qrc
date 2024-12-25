@@ -1,0 +1,11 @@
+<RCC>
+    <qresource prefix="/configsFC">
+        <file>configsFC/help.html</file>
+        <file>configsFC/style.qss</file>
+    </qresource>
+    <qresource prefix="/iconosFC">
+        <file>iconosFC/help-circle.svg</file>
+        <file>iconosFC/maximize-expand-svgrepo-com.svg</file>
+        <file>iconosFC/minimize-compress-svgrepo-com.svg</file>
+    </qresource>
+</RCC>
