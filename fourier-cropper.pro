@@ -19,7 +19,7 @@ FORMS += \
     fouriercroppersimulatorui.ui \
 
 RESOURCES += \
-    configsHS.qrc
+    configsFC.qrc
 
 # Enable pkg-config
 CONFIG += link_pkgconfig
