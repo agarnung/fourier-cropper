@@ -23,6 +23,8 @@ int FourierCropperSimulator::init()
     mSimulatorUi->adjustSize();
 
     qDebug() << QObject::tr("%1 - %2 - Simulator created").arg(this->metaObject()->className()).arg(__func__);
+
+    return 0;
 }
 
 int FourierCropperSimulator::closeSim()

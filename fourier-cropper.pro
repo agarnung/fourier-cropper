@@ -7,11 +7,13 @@ CONFIG += c++20
 TARGET = FourierCropper
 
 SOURCES += \
+    fourier.cpp \
     fouriercroppersimulator.cpp \
     fouriercroppersimulatorui.cpp \
     main.cpp \
 
 HEADERS += \
+    fourier.h \
     fouriercroppersimulator.h \
     fouriercroppersimulatorui.h \
 
