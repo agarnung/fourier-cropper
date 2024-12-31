@@ -83,10 +83,3 @@ void BeforeAfterFilteringWidget::on_savePushButton_released()
     msgBox.setStandardButtons(QMessageBox::Ok);
     msgBox.exec();
 }
-
-
-void BeforeAfterFilteringWidget::on_helpPushButton_released()
-{
-
-}
-
