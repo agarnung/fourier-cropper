@@ -9,3 +9,4 @@ _TODO_:
 - The idea will be binding all required libraries into a single AppImage, in order to ship the application directly
 - Manage both color and grayscale images
 - Enable loading a local mask from file
+- Download sample images (directional patterns, noisy, etc.)
