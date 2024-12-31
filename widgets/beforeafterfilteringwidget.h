@@ -16,6 +16,7 @@ class BeforeAfterFilteringWidget : public QWidget
 
         void setBeforeImage(const QImage& img);
         void setAfterImage(const QImage& img);
+        void setFilteredImage(const QImage& img) { mFiltered = img.copy(); };
 
     private:
         Ui::BeforeAfterFilteringWidget* mUi = nullptr;

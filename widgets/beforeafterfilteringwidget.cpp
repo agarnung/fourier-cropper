@@ -73,6 +73,7 @@ void BeforeAfterFilteringWidget::on_savePushButton_released()
             msgBox.setText("Filtered image could not be saved");
             msgBox.setStandardButtons(QMessageBox::Ok);
             msgBox.exec();
+            return;
         }
     }
 
@@ -81,5 +82,11 @@ void BeforeAfterFilteringWidget::on_savePushButton_released()
     msgBox.setText("Filtered image saved in " + directory);
     msgBox.setStandardButtons(QMessageBox::Ok);
     msgBox.exec();
+}
+
+
+void BeforeAfterFilteringWidget::on_helpPushButton_released()
+{
+
 }
 

@@ -36,35 +36,6 @@
       </spacer>
      </item>
      <item>
-      <widget class="QPushButton" name="helpPushButton">
-       <property name="minimumSize">
-        <size>
-         <width>30</width>
-         <height>30</height>
-        </size>
-       </property>
-       <property name="maximumSize">
-        <size>
-         <width>30</width>
-         <height>30</height>
-        </size>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-       <property name="icon">
-        <iconset resource="../assets/configsFC.qrc">
-         <normaloff>:/iconosFC/iconosFC/help-circle.svg</normaloff>:/iconosFC/iconosFC/help-circle.svg</iconset>
-       </property>
-       <property name="iconSize">
-        <size>
-         <width>25</width>
-         <height>25</height>
-        </size>
-       </property>
-      </widget>
-     </item>
-     <item>
       <widget class="QPushButton" name="savePushButton">
        <property name="minimumSize">
         <size>
