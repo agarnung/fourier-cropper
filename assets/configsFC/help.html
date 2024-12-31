@@ -26,7 +26,7 @@
     <h2><span style='color:#00D000;'>Usage:</span></h2>
     <ul>
         <li>
-            The purpose of the simulator is to create a binary mask to serve as a frequency filter for the EntityFrequentialFilter in CUSTOM mode, which can be useful for removing periodic horizontal patterns from an image, for example.
+            The purpose of the simulator is to create a binary mask to serve as a frequency filter which can be useful for removing periodic horizontal patterns from an image, for example.
         </li>
         <li>
             The regions drawn on the spectrum magnitude represent the frequencies that will be suppressed later.
@@ -38,7 +38,7 @@
             Press 'R' to clear the drawing.
         </li>
         <li>
-            You can execute the flow to load the image connected to the 'inputimage' input of the associated entity or load an arbitrary image from a file using the 'Load image' button.
+            One can load an arbitrary image from a local path using the 'Load image' button.
         </li>
         <li>
             When saving the filter mask, you can either write the extension or just the name; in the latter case, it will be saved in PNG format.
@@ -48,7 +48,10 @@
             If 'Crop Mode' is OFF, then you draw those spectrum parts which will be the only leftover when filtering.
         </li>
         <li>
-            The mask is saved in 8-bit 0-255 format.
+            Pressing 'Filter' a window appears showing the original and the filtered image. To save the filtered image, press the save icon of this window and select the target directory.
+        </li>
+        <li>
+            The mask and the filtered image are saved in 8-bit 0-255 format.
         </li>
     </ul>
     <br>
