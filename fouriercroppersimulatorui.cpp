@@ -243,7 +243,7 @@ void FourierCropperSimulatorUi::on_loadImagePushButton_released()
         if (!mInputImage.empty())
         {
             cv::Mat mInputImage_64F = universalConvertTo(mInputImage, CV_64FC1);
-            transformadaFourier2D(mInputImage_64F, mMagnitude);
+            transformadaFourier2D(mInputImage_64F, &mMagnitude);
             cv::add(mMagnitude, cv::Mat::ones(mMagnitude.rows, mMagnitude.cols, mMagnitude.type()) / 1e9, mMagnitude_vis);
             cv::log(mMagnitude_vis, mMagnitude_vis);
             cv::normalize(mMagnitude_vis, mMagnitude_vis, 0.0, 1.0, cv::NORM_MINMAX, CV_64F);
@@ -256,5 +256,11 @@ void FourierCropperSimulatorUi::on_loadImagePushButton_released()
     }
     else
         QMessageBox::warning(this, tr("Error"), tr("No se pudo abrir la imagen: %1").arg(filePath));
+}
+
+
+void FourierCropperSimulatorUi::on_radioButtonDrawMode_toggled(bool checked)
+{
+    mUi->radioButtonDrawMode->setText(checked ? "Crop Mode ON" : "Crop Mode OFF");
 }
 
