@@ -1,10 +1,14 @@
-#ifndef SCROLLABLEMESSAGEBOX_H
-#define SCROLLABLEMESSAGEBOX_H
+#pragma once
 
-class ScrollableMessageBox
+#include <QDialog>
+#include <QVBoxLayout>
+
+class ScrollableMessageBox : public QDialog
 {
-public:
-    ScrollableMessageBox();
+    public:
+        explicit ScrollableMessageBox(const QString& message, QWidget* parent = nullptr);
+
+    private:
+        QVBoxLayout* layout = nullptr;
 };
 
-#endif // SCROLLABLEMESSAGEBOX_H

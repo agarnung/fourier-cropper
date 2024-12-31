@@ -202,7 +202,7 @@
   <customwidget>
    <class>DrawWidget</class>
    <extends>QLabel</extends>
-   <header>./app/fouriercroppersimulatorui.h</header>
+   <header>./widgets/drawwidget.h</header>
   </customwidget>
  </customwidgets>
  <resources>
