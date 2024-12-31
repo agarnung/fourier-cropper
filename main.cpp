@@ -1,4 +1,4 @@
-#include "fouriercroppersimulator.h"
+#include "./app/fouriercroppersimulator.h"
 
 #include <QApplication>
 

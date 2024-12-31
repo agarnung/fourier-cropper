@@ -7,21 +7,28 @@ CONFIG += c++20
 TARGET = FourierCropper
 
 SOURCES += \
-    fourier.cpp \
-    fouriercroppersimulator.cpp \
-    fouriercroppersimulatorui.cpp \
+    ./widgets/beforeafterfilteringwidget.cpp \
+    ./widgets/drawwidget.cpp \
+    ./libs/fourier.cpp \
+    ./app/fouriercroppersimulator.cpp \
+    ./app/fouriercroppersimulatorui.cpp \
     main.cpp \
+    ./widgets/scrollablemessagebox.cpp
 
 HEADERS += \
-    fourier.h \
-    fouriercroppersimulator.h \
-    fouriercroppersimulatorui.h \
+    ./widgets/beforeafterfilteringwidget.h \
+    ./widgets/drawwidget.h \
+    ./libs/fourier.h \
+    ./app/fouriercroppersimulator.h \
+    ./app/fouriercroppersimulatorui.h \
+    ./widgets/scrollablemessagebox.h
 
 FORMS += \
-    fouriercroppersimulatorui.ui \
+    ./widgets/beforeafterfilteringwidget.ui \
+    ./app/fouriercroppersimulatorui.ui \
 
 RESOURCES += \
-    configsFC.qrc
+    ./assets/configsFC.qrc
 
 # Enable pkg-config
 CONFIG += link_pkgconfig
