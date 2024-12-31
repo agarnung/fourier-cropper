@@ -325,20 +325,24 @@ void FourierCropperSimulatorUi::on_filterPushButton_released()
 
     filtered.convertTo(filtered, CV_8UC1, 255.0);
 
+    {
+        cv::Mat filteredImage;
+        cv::cvtColor(universalConvertTo(filtered, CV_8UC1), filteredImage, cv::COLOR_GRAY2BGR);
+        mBeforeAfterWidget->setFilteredImage(QImage(filteredImage.data, filteredImage.cols, filteredImage.rows, filteredImage.step, QImage::Format_RGB888));
+    }
+
     msgBox.close();
 
     {
         cv::Mat displayImage;
         cv::cvtColor(universalConvertTo(mInputImage, CV_8UC1), displayImage, cv::COLOR_GRAY2BGR);
         mBeforeQImage = QImage(displayImage.data, displayImage.cols, displayImage.rows, displayImage.step, QImage::Format_RGB888);
-        mBeforeQImage.save("/home/alejandro/Pictures/mBeforeQImage.png", 0, 100);
     }
 
     {
         cv::Mat displayImage;
         cv::cvtColor(universalConvertTo(filtered, CV_8UC1), displayImage, cv::COLOR_GRAY2BGR);
         mAfterQImage = QImage(displayImage.data, displayImage.cols, displayImage.rows, displayImage.step, QImage::Format_RGB888);
-        mAfterQImage.save("/home/alejandro/Pictures/mAfterQImage.png", 0, 100);
     }
 
     if (!mBeforeAfterWidget)
@@ -352,6 +356,9 @@ void FourierCropperSimulatorUi::on_filterPushButton_released()
 
     if (mBeforeAfterWidget->isHidden())
         mBeforeAfterWidget->show();
+
+    if (!mBeforeAfterWidget->isVisible())
+        mBeforeAfterWidget->setVisible(true);
 }
 
 void FourierCropperSimulatorUi::on_fullscreenButton_released()
