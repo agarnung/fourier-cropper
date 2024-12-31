@@ -28,12 +28,7 @@ void DrawWidget::setImage(const cv::Mat& image)
 
     this->setFixedSize(QSize(inputImage.cols, inputImage.rows));
 
-    cv::Mat displayImage;
-    cv::cvtColor(inputImage, displayImage, cv::COLOR_GRAY2BGR);
-    // cv::normalize(displayImage, displayImage, 0, 255, cv::NORM_MINMAX);
-    // cv::convertScaleAbs(displayImage, displayImage);
-
-    QImage qImage(displayImage.data, displayImage.cols, displayImage.rows, displayImage.step, QImage::Format_RGB888);
+    QImage qImage(inputImage.data, inputImage.cols, inputImage.rows, inputImage.step, QImage::Format_Grayscale8);
     mInputImageQImage = qImage.copy();
 
     mask = QImage(inputImage.cols, inputImage.rows, QImage::Format_ARGB32);
@@ -101,7 +96,6 @@ void DrawWidget::updateDisplay()
 void DrawWidget::resetDrawing()
 {
     inputImage = originalImage.clone();
-    // cv::resize(inputImage, inputImage, cv::Size(1920, 1080));
     mask.fill(Qt::transparent);
     updateDisplay();
     this->update();
@@ -176,6 +170,9 @@ void FourierCropperSimulatorUi::initializeSimulator()
     }
     else
         qWarning() << QObject::tr("%1 - %2 - Could not open stylesheet").arg(this->metaObject()->className()).arg(__func__);
+
+    mUi->pencilSizeSlider->setValue(25);
+    emit mUi->pencilSizeSlider->valueChanged(25);
 
     this->update();
 }
@@ -276,6 +273,11 @@ void FourierCropperSimulatorUi::on_loadImagePushButton_released()
 
             mUi->drawWidget->setImage(mMagnitude_vis);
 
+            cv::Mat displayImage = universalConvertTo(mInputImage, CV_8UC1);
+
+            QImage qImage(displayImage.data, displayImage.cols, displayImage.rows, displayImage.step, QImage::Format_Grayscale8);
+            mBeforeQImage = qImage.copy();
+
             this->update();
             this->updateGeometry();
         }
@@ -323,36 +325,25 @@ void FourierCropperSimulatorUi::on_filterPushButton_released()
         return;
     }
 
-    filtered.convertTo(filtered, CV_8UC1, 255.0);
-
-    {
-        cv::Mat filteredImage;
-        cv::cvtColor(universalConvertTo(filtered, CV_8UC1), filteredImage, cv::COLOR_GRAY2BGR);
-        mBeforeAfterWidget->setFilteredImage(QImage(filteredImage.data, filteredImage.cols, filteredImage.rows, filteredImage.step, QImage::Format_RGB888));
-    }
-
     msgBox.close();
 
-    {
-        cv::Mat displayImage;
-        cv::cvtColor(universalConvertTo(mInputImage, CV_8UC1), displayImage, cv::COLOR_GRAY2BGR);
-        mBeforeQImage = QImage(displayImage.data, displayImage.cols, displayImage.rows, displayImage.step, QImage::Format_RGB888);
-    }
-
-    {
-        cv::Mat displayImage;
-        cv::cvtColor(universalConvertTo(filtered, CV_8UC1), displayImage, cv::COLOR_GRAY2BGR);
-        mAfterQImage = QImage(displayImage.data, displayImage.cols, displayImage.rows, displayImage.step, QImage::Format_RGB888);
-    }
+    filtered.convertTo(filtered, CV_8UC1, 255.0);
 
     if (!mBeforeAfterWidget)
     {
-        showErrorMessage("There was an error filtering the image");
+        showErrorMessage("The filtered image could not be shown");
         return;
+    }
+
+    {
+        cv::Mat filteredImage = universalConvertTo(filtered, CV_8UC1);
+        QImage qImage(filteredImage.data, filteredImage.cols, filteredImage.rows, filteredImage.step, QImage::Format_Grayscale8);
+        mAfterQImage = qImage.copy();
     }
 
     mBeforeAfterWidget->setBeforeImage(mBeforeQImage);
     mBeforeAfterWidget->setAfterImage(mAfterQImage);
+    mBeforeAfterWidget->setFilteredImage(mAfterQImage);
 
     if (mBeforeAfterWidget->isHidden())
         mBeforeAfterWidget->show();

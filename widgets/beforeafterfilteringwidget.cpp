@@ -27,14 +27,14 @@ BeforeAfterFilteringWidget::~BeforeAfterFilteringWidget()
 void BeforeAfterFilteringWidget::setBeforeImage(const QImage& img)
 {
     mUi->beforeLabel->clear();
-    mUi->beforeLabel->setPixmap(QPixmap::fromImage(img));
+    mUi->beforeLabel->setPixmap(QPixmap::fromImage(img.copy()));
     mUi->beforeLabel->update();
 }
 
 void BeforeAfterFilteringWidget::setAfterImage(const QImage& img)
 {
     mUi->afterLabel->clear();
-    mUi->afterLabel->setPixmap(QPixmap::fromImage(img));
+    mUi->afterLabel->setPixmap(QPixmap::fromImage(img.copy()));
     mUi->afterLabel->update();
 }
 
