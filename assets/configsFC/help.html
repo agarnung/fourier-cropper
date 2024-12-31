@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            font-size: 16px;
+            font-family: Arial;
+            color: #000;
+            text-align: justify;
+        }
+
+        h2 {
+            font-size: 17px;
+            font-weight: bold;
+            color: #007bff;
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+    </style>
+</head>
+<body>
+    <h2>Help on Using the Simulator</h2>
+    <p>Below are instructions and recommendations for correctly using the 'Fourier Cropper' application.</p>
+    <h2><span style='color:#00D000;'>Usage:</span></h2>
+    <ul>
+        <li>
+            The purpose of the simulator is to create a binary mask to serve as a frequency filter for the EntityFrequentialFilter in CUSTOM mode, which can be useful for removing periodic horizontal patterns from an image, for example.
+        </li>
+        <li>
+            The regions drawn on the spectrum magnitude represent the frequencies that will be suppressed later.
+        </li>
+        <li>
+            Currently, the drawing mode is freehand.
+        </li>
+        <li>
+            Press 'R' to clear the drawing.
+        </li>
+        <li>
+            You can execute the flow to load the image connected to the 'inputimage' input of the associated entity or load an arbitrary image from a file using the 'Load image' button.
+        </li>
+        <li>
+            When saving the filter mask, you can either write the extension or just the name; in the latter case, it will be saved in PNG format.
+        </li>
+        <li>
+            If 'Crop Mode' is ON, then you draw those spectrum part which will be supressed when filtering.
+            If 'Crop Mode' is OFF, then you draw those spectrum parts which will be the only leftover when filtering.
+        </li>
+        <li>
+            The mask is saved in 8-bit 0-255 format.
+        </li>
+    </ul>
+    <br>
+    <p>-- @agarnung</p>
+</body>
+</html>
