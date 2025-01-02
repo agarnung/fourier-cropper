@@ -9,6 +9,8 @@
 
 /*.pro.user
 
+*.idx
+
 # C++ objects and libs
 *.slo
 *.lo
