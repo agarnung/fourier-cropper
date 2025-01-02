@@ -152,9 +152,9 @@ void FourierCropperSimulatorUi::on_loadImagePushButton_released()
 
             mUi->drawWidget->setImage(mMagnitude_vis);
 
-            cv::Mat displayImage = universalConvertTo(mInputImage, CV_8UC1);
+            cv::Mat displayImage = universalConvertTo(mInputImage, mImageIsColored ? CV_8UC3 : CV_8UC1);
 
-            QImage qImage(displayImage.data, displayImage.cols, displayImage.rows, displayImage.step, QImage::Format_Grayscale8);
+            QImage qImage(displayImage.data, displayImage.cols, displayImage.rows, displayImage.step, mImageIsColored ? QImage::Format_BGR888 : QImage::Format_Grayscale8);
             mBeforeQImage = qImage.copy();
 
             this->update();
@@ -201,11 +201,11 @@ void FourierCropperSimulatorUi::on_filterPushButton_released()
         std::vector<cv::Mat> channels(3);
         std::vector<cv::Mat> filtered_channels(3);
         cv::split(mInputImage, channels);
-        foreach (const cv::Mat& ch, channels)
+        for (size_t i = 0; i < channels.size(); ++i)
         {
             cv::Mat filtered_channel(mInputImage.size(), CV_64FC1);
-            filter2DFreq(universalConvertTo(ch, CV_64FC1), filtered, filter, false, true);
-            filtered_channels.emplace_back(filtered);
+            filter2DFreq(universalConvertTo(channels[i], CV_64FC1), filtered_channel, filter, false, true);
+            filtered_channels[i] = filtered_channel;
         }
         cv::merge(filtered_channels, filtered);
     }
@@ -229,7 +229,7 @@ void FourierCropperSimulatorUi::on_filterPushButton_released()
     }
 
     {
-        QImage qImage(filtered.data, filtered.cols, filtered.rows, filtered.step, mImageIsColored ? QImage::Format_RGB888 : QImage::Format_Grayscale8);
+        QImage qImage(filtered.data, filtered.cols, filtered.rows, filtered.step, mImageIsColored ? QImage::Format_BGR888 : QImage::Format_Grayscale8);
         mAfterQImage = qImage.copy();
     }
 
