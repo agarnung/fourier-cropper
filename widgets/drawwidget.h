@@ -28,14 +28,13 @@ class DrawWidget : public QLabel
         void resetDrawing();
 
         cv::Mat originalImage;
-        cv::Mat originalResizedImage;
         cv::Mat inputImage;
         QImage mask;
         QImage mInputImageQImage;
         QPoint lastPoint;
         int pencilSize;
-        int maxHeight;
-        int maxWidth;
+        double maxHeight;
+        double maxWidth;
         bool drawing;
 };
 

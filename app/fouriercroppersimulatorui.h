@@ -48,6 +48,8 @@ class FourierCropperSimulatorUi : public QWidget
 
         void generateMask();
 
+        bool mImageIsColored;
+
     private slots:
         void on_pencilSizeSlider_valueChanged(int value);
         void on_saveMaskButton_clicked();

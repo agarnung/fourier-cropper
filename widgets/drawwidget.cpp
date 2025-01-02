@@ -12,19 +12,21 @@ DrawWidget::DrawWidget(QWidget* parent)
     this->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
     this->setFocusPolicy(Qt::StrongFocus);
 
-    maxHeight = qApp->screens()[0]->size().height() * 0.8;
-    maxWidth = qApp->screens()[0]->size().width() * 0.8;
+    maxHeight = (double)qApp->screens()[0]->size().height() * 0.25;
+    maxWidth = (double)qApp->screens()[0]->size().width() * 0.25;
 }
 
 void DrawWidget::setImage(const cv::Mat& image)
 {
     inputImage = image.clone();
 
-    if (originalImage.size().height > maxHeight)
-        cv::resize(originalImage, originalImage, cv::Size(originalImage.size().width, maxHeight));
-
-    if (originalImage.size().width > maxWidth)
-        cv::resize(originalImage, originalImage, cv::Size(maxWidth, originalImage.size().height));
+    const double height = (double)inputImage.size().height;
+    const double width = (double)inputImage.size().width;
+    if (height > maxHeight || width > maxWidth)
+    {
+        double resize_factor = (height > width) ? maxHeight / height : maxWidth / width;
+        cv::resize(inputImage, inputImage, cv::Size(), resize_factor, resize_factor, cv::INTER_CUBIC);
+    }
 
     originalImage = inputImage.clone();
 
@@ -97,7 +99,7 @@ void DrawWidget::updateDisplay()
 
 void DrawWidget::resetDrawing()
 {
-    inputImage = originalImage.clone();
+    // inputImage = originalImage.clone();
     mask.fill(Qt::transparent);
     updateDisplay();
     this->update();

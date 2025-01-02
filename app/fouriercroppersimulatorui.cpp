@@ -135,7 +135,11 @@ void FourierCropperSimulatorUi::on_loadImagePushButton_released()
 
     if (!filePath.isEmpty())
     {
-        mInputImage = cv::imread(filePath.toStdString(), cv::IMREAD_GRAYSCALE);
+        mInputImage = cv::imread(filePath.toStdString(), cv::IMREAD_UNCHANGED);
+        if (mInputImage.channels() == 4)
+            cv::cvtColor(mInputImage, mInputImage, cv::COLOR_BGRA2BGR);
+
+        mImageIsColored = mInputImage.channels() == 3 ? true : false;
 
         if (!mInputImage.empty())
         {
@@ -192,7 +196,21 @@ void FourierCropperSimulatorUi::on_filterPushButton_released()
     cv::Mat filter, filtered;
     mMask.convertTo(filter, CV_64FC1, 1.0 / 255.0);
     cv::resize(filter, filter, mInputImage.size(), 0.0, 0.0, cv::INTER_NEAREST_EXACT);
-    filter2DFreq(universalConvertTo(mInputImage, CV_64FC1), filtered, filter, false, true);
+    if (mImageIsColored)
+    {
+        std::vector<cv::Mat> channels(3);
+        std::vector<cv::Mat> filtered_channels(3);
+        cv::split(mInputImage, channels);
+        foreach (const cv::Mat& ch, channels)
+        {
+            cv::Mat filtered_channel(mInputImage.size(), CV_64FC1);
+            filter2DFreq(universalConvertTo(ch, CV_64FC1), filtered, filter, false, true);
+            filtered_channels.emplace_back(filtered);
+        }
+        cv::merge(filtered_channels, filtered);
+    }
+    else
+        filter2DFreq(universalConvertTo(mInputImage, CV_64FC1), filtered, filter, false, true);
 
     if (filtered.empty())
     {
@@ -202,7 +220,7 @@ void FourierCropperSimulatorUi::on_filterPushButton_released()
 
     msgBox.close();
 
-    filtered.convertTo(filtered, CV_8UC1, 255.0);
+    filtered.convertTo(filtered, mImageIsColored ? CV_8UC3 : CV_8UC1, 255.0);
 
     if (!mBeforeAfterWidget)
     {
@@ -211,8 +229,7 @@ void FourierCropperSimulatorUi::on_filterPushButton_released()
     }
 
     {
-        cv::Mat filteredImage = universalConvertTo(filtered, CV_8UC1);
-        QImage qImage(filteredImage.data, filteredImage.cols, filteredImage.rows, filteredImage.step, QImage::Format_Grayscale8);
+        QImage qImage(filtered.data, filtered.cols, filtered.rows, filtered.step, mImageIsColored ? QImage::Format_RGB888 : QImage::Format_Grayscale8);
         mAfterQImage = qImage.copy();
     }
 
