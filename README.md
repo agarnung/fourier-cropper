@@ -18,3 +18,4 @@ _TODO_:
 - Manage both color and grayscale images
 - Enable loading a local mask from file
 - Download sample images (directional patterns, noisy, etc.)
+- Fix max size when loading to drawdiget
