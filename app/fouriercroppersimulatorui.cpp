@@ -188,6 +188,7 @@ void FourierCropperSimulatorUi::on_filterPushButton_released()
     }
 
     QMessageBox msgBox;
+    msgBox.setIcon(QMessageBox::Information);
     msgBox.setWindowTitle("Processing...");
     msgBox.show();
 

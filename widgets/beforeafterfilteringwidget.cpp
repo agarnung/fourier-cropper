@@ -69,6 +69,7 @@ void BeforeAfterFilteringWidget::on_savePushButton_released()
         else
         {
             QMessageBox msgBox;
+            msgBox.setIcon(QMessageBox::Warning);
             msgBox.setWindowTitle("Warning");
             msgBox.setText("Filtered image could not be saved");
             msgBox.setStandardButtons(QMessageBox::Ok);
@@ -78,6 +79,7 @@ void BeforeAfterFilteringWidget::on_savePushButton_released()
     }
 
     QMessageBox msgBox;
+    msgBox.setIcon(QMessageBox::Information);
     msgBox.setWindowTitle("Image saved");
     msgBox.setText("Filtered image saved in " + directory);
     msgBox.setStandardButtons(QMessageBox::Ok);
