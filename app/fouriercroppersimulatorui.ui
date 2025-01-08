@@ -188,6 +188,13 @@
       </widget>
      </item>
      <item>
+      <widget class="QPushButton" name="loadMaskButton">
+       <property name="text">
+        <string>Load Mask</string>
+       </property>
+      </widget>
+     </item>
+     <item>
       <widget class="QPushButton" name="saveMaskButton">
        <property name="text">
         <string>Save Mask</string>

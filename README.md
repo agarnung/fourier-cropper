@@ -15,6 +15,5 @@ It is recommended build OpenCV with `-DOPENCV_GENERATE_PKGCONFIG=ON` see [this](
 
 _TODO_:
 - The idea will be binding all required libraries into a single AppImage, in order to ship the application directly
-- Enable loading a local mask from file
 - Download sample images (directional patterns, noisy, etc.)
 - Show the messagebox of on_filterPushButton_released in another thread to let the text and icon appear

@@ -259,3 +259,41 @@ void FourierCropperSimulatorUi::on_fullscreenButton_released()
     this->update();
 }
 
+void FourierCropperSimulatorUi::on_loadMaskButton_released()
+{
+    if (!mInputImage.data || mInputImage.empty())
+    {
+        QMessageBox::information(this, tr("Error"), tr("You should first load an image"));
+        return;
+    }
+
+    QString filePath = QFileDialog::getOpenFileName(this, tr("Select Mask"), QDir::homePath(), tr("Image Files (*.png *.jpg *.jpeg *.bmp *.gif)"));
+
+    if (!filePath.isEmpty())
+    {
+        std::string imagePath = filePath.toStdString();
+
+        mMask = universalConvertTo(cv::imread(imagePath, cv::IMREAD_GRAYSCALE), CV_8UC1);
+        cv::resize(mMask, mMask, mUi->drawWidget->getImage().size(), 0.0, 0.0, cv::INTER_CUBIC);
+        if (!mMask.data || mMask.empty())
+        {
+            QMessageBox::warning(this, tr("Error"), tr("Error reading the mask: ") + filePath);
+            return;
+        }
+
+        const int rows = mMask.rows;
+        const int cols = mMask.cols;
+        const uchar* mMaskPtr = mMask.ptr<uchar>(0);
+        QImage maskImage(cols, rows, QImage::Format_ARGB32);
+        for (int row = 0; row < rows; ++row)
+        {
+            for (int col = 0; col < cols; ++col)
+            {
+                uchar pixelValue = mMaskPtr[row * cols + col];
+                maskImage.setPixel(col, row, pixelValue == 0 ? qRgba(255, 0, 0, 255) : qRgba(0, 0, 0, 0));
+            }
+        }
+        mUi->drawWidget->setMask(maskImage);
+    }
+}
+

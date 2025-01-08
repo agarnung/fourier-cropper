@@ -41,9 +41,19 @@ void DrawWidget::setImage(const cv::Mat& image)
     updateDisplay();
 }
 
+cv::Mat DrawWidget::getImage()
+{
+    return inputImage;
+}
+
 QImage DrawWidget::getMask()
 {
     return mask;
+}
+
+void DrawWidget::setMask(QImage img)
+{
+    mask = img;
 }
 
 void DrawWidget::setPencilSize(int size)

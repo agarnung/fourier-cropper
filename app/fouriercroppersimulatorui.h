@@ -58,4 +58,5 @@ class FourierCropperSimulatorUi : public QWidget
         void on_radioButtonCropMode_toggled(bool checked);
         void on_filterPushButton_released();
         void on_fullscreenButton_released();
+        void on_loadMaskButton_released();
 };

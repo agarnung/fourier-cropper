@@ -10,18 +10,20 @@ class DrawWidget : public QLabel
     Q_OBJECT
 
     public:
-        DrawWidget(QWidget *parent = nullptr);
+        DrawWidget(QWidget* parent = nullptr);
 
-        void setImage(const cv::Mat &image);
+        void setImage(const cv::Mat& image);
+        cv::Mat getImage();
         QImage getMask();
+        void setMask(QImage img);
         void setPencilSize(int size);
 
     protected:
-        void paintEvent(QPaintEvent *event) override;
-        void mousePressEvent(QMouseEvent *event) override;
-        void mouseMoveEvent(QMouseEvent *event) override;
-        void mouseReleaseEvent(QMouseEvent *event) override;
-        void keyPressEvent(QKeyEvent *event) override;
+        void paintEvent(QPaintEvent* event) override;
+        void mousePressEvent(QMouseEvent* event) override;
+        void mouseMoveEvent(QMouseEvent* event) override;
+        void mouseReleaseEvent(QMouseEvent* event) override;
+        void keyPressEvent(QKeyEvent* event) override;
 
     private:
         void updateDisplay();
