@@ -1,0 +1,15 @@
+# App Qt con GUI (WSLg / X11 en el host).
+# Uso: docker compose build && docker compose run --rm app
+# El volumen "." es la carpeta del proyecto (misma que este compose).
+# DISPLAY=:0 encaja con WSLg. Si tu X11 es otro (p. ej. :1): DISPLAY=:1 docker compose run --rm app
+
+services:
+  app:
+    build: .
+    image: fourier-cropper:local
+    volumes:
+      - .:/opt/fourier-cropper
+      - /tmp/.X11-unix:/tmp/.X11-unix
+    environment:
+      DISPLAY: ":0"
+      QT_X11_NO_MITSHM: "1"

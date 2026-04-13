@@ -1,5 +1,7 @@
 #include "fouriercroppersimulator.h"
 
+#include <QDebug>
+
 FourierCropperSimulator::FourierCropperSimulator(QObject *parent)
     : QObject{parent}
 {

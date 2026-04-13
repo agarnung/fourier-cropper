@@ -17,3 +17,9 @@ _TODO_:
 - The idea will be binding all required libraries into a single AppImage, in order to ship the application directly
 - Download sample images (directional patterns, noisy, etc.)
 - Show the messagebox of on_filterPushButton_released in another thread to let the text and icon appear
+
+---
+
+**Local (Linux):** install `build-essential`, `qtbase5-dev`, `qttools5-dev-tools`, `pkg-config`, `libopencv-dev`; then `mkdir build && cd build && qmake CONFIG+=release ../fourier-cropper.pro && make -j$(nproc) && ./FourierCropper`.
+
+**Docker:** `docker compose build && docker compose run --rm app` (GUI needs WSLg or X11; use `DISPLAY=:1 docker compose run --rm app` if not `:0`). The compose bind-mounts this repo to `/opt/fourier-cropper`—put images under the project on disk and open them from that path (e.g. `/opt/fourier-cropper/...`) in the file dialog.

@@ -1,6 +1,8 @@
 #include "drawwidget.h"
 
+#include <QApplication>
 #include <QPainter>
+#include <QScreen>
 
 #include <opencv4/opencv2/imgproc.hpp>
 
