@@ -135,7 +135,7 @@ void FourierCropperSimulatorUi::on_helpPushButton_released()
 
 void FourierCropperSimulatorUi::on_loadImagePushButton_released()
 {
-    QString filePath = QFileDialog::getOpenFileName(this, tr("Open Image"), "", tr("Images (*.png *.jpg *.bmp *.jpeg *.tif *.tiff)"));
+    QString filePath = QFileDialog::getOpenFileName(this, tr("Open Image"), qEnvironmentVariable("APP_IMAGES_DIR", QDir::homePath()), tr("Images (*.png *.jpg *.bmp *.jpeg *.tif *.tiff)"));
 
     if (!filePath.isEmpty())
     {
